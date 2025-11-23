@@ -3,52 +3,109 @@
 
 @section('head')
     <style>
-        /* Brand colors */
-        :root {
+        /* ---------------------------
+           Brand colors & variables
+           --------------------------- */
+        :root{
             --joya-green: #375523;
             --joya-green-2: #4b7a3a;
             --joya-green-3: #9cc68a;
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255,255,255,0.06);
         }
 
-        /* Hero blobs */
+        /* Direction aware small tweaks */
+        [dir="rtl"] .hero-content { text-align: right; }
+        [dir="rtl"] .programs-grid { direction: rtl; }
+        [dir="rtl"] .where-map { margin-left: 0; margin-right: auto; }
+
+        /* ---------------------------
+           Fonts (Pashto / Persian)
+           ---------------------------
+           NOTE: Replace the font files with preferred Pashto/Persian webfonts
+           placed in /public/assets/fonts/ if you have them.
+           If you add fonts, adjust the font-family names below.
+        */
+        @font-face {
+            font-family: 'JoyaSans';
+            src: local('Inter'), local('System'), local('Arial');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Example Pashto/Persian font fallback - add actual file to /public/assets/fonts/ if available */
+        @font-face{
+            font-family: 'JoyaPashto';
+            src: url('/assets/fonts/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('/assets/fonts/Vazirmatn-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html[data-lang="fa"], html[data-lang="ps"] {
+            /* Prefer Persian/Pashto font when page language switches */
+            font-family: "JoyaPashto", "JoyaSans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* ---------------------------
+           HERO: improved morphing backgrounds
+           --------------------------- */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* base hero gradient (light) */
+        .hero-inner {
+            background: linear-gradient(180deg, rgba(55,85,35,0.10), rgba(255,255,255,0.02));
+        }
+
+        /* dark-mode hero: more subtle, toned-down green */
+        .dark .hero-inner,
+        [data-theme="dark"] .hero-inner {
+            background: linear-gradient(180deg, rgba(10,18,12,0.65), rgba(6,12,8,0.7));
+            /* soft green wash on top but low opacity */
+            background-blend-mode: overlay;
+        }
+
+        /* Hero blobs - refined for dark mode */
         .hero-blob {
             position: absolute;
             filter: blur(36px);
-            opacity: 0.85;
-            mix-blend-mode: multiply;
+            opacity: 0.8;
+            mix-blend-mode: screen;
             animation: float 12s ease-in-out infinite;
-            border-radius: 48% 52% 60% 40% / 45% 40% 60% 55%;
+            border-radius: 44% 56% 60% 40% / 45% 40% 60% 55%;
+            pointer-events: none;
         }
 
         .hero-blob.one {
             width: 520px;
             height: 420px;
-            background: linear-gradient(135deg, var(--joya-green) 0%, var(--joya-green-2) 100%);
-            top: -60px;
-            left: -60px;
-            animation-duration: 14s;
+            left: -80px;
+            top: -40px;
+            background: radial-gradient(circle at 20% 30%, rgba(156,198,138,0.95), rgba(75,122,58,0.12) 60%);
+            mix-blend-mode: screen;
+            opacity: 0.95;
         }
-
         .hero-blob.two {
             width: 420px;
             height: 360px;
-            background: linear-gradient(135deg, rgba(156,198,138,0.9) 0%, rgba(75,122,58,0.85) 100%);
-            right: -80px;
+            right: -60px;
             top: 40px;
+            background: radial-gradient(circle at 80% 20%, rgba(57,117,34,0.9), rgba(57,117,34,0.08) 60%);
+            opacity: 0.9;
             animation-duration: 11s;
             animation-direction: reverse;
         }
-
         .hero-blob.three {
             width: 260px;
             height: 260px;
-            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0));
+            left: 8%;
             bottom: -40px;
-            left: 10%;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0));
             opacity: 0.55;
-            animation-duration: 16s;
         }
 
         @keyframes float {
@@ -57,168 +114,200 @@
             100% { transform: translateY(0) rotate(0deg) }
         }
 
-        /* Glass card in hero */
+        /* ---------------------------
+           Glass / neumorphism refinements
+           --------------------------- */
         .glass {
-            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.12));
+            border: 1px solid rgba(255,255,255,0.35);
+            backdrop-filter: blur(8px) saturate(110%);
+            -webkit-backdrop-filter: blur(8px) saturate(110%);
+        }
+
+        /* Dark glass variation */
+        .dark .glass,
+        [data-theme="dark"] .glass {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: 0 8px 30px rgba(3,6,4,0.5);
+        }
+
+        .soft-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+
+        /* Slightly heavier glass for important cards */
+        .glass-strong {
+            backdrop-filter: blur(10px) saturate(120%);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+        }
+
+        /* ---------------------------
+           Logo swap / Header scroll fix
+           --------------------------- */
+        .logo-light { display: inline-block; }
+        .logo-dark { display: none; }
+
+        /* When body/html has .dark class, show the white logo */
+        .dark .logo-light, [data-theme="dark"] .logo-light { display: none; }
+        .dark .logo-dark, [data-theme="dark"] .logo-dark { display: inline-block; }
+
+        /* header scroll background (applies to header in layout) */
+        .scrolled-header {
+            background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.80));
+            box-shadow: 0 6px 18px rgba(16,24,16,0.06);
             backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            transition: background .22s ease, box-shadow .22s ease, transform .22s ease;
+        }
+        .dark .scrolled-header, [data-theme="dark"] .scrolled-header {
+            background: linear-gradient(180deg, rgba(6,12,8,0.6), rgba(6,12,8,0.45));
+            box-shadow: 0 6px 24px rgba(0,0,0,0.6);
         }
 
-        /* Counters */
-        .counter-number {
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-        }
+        /* make header sticky look smoother */
+        .scrolled-header .nav-link { color: inherit !important; }
 
-        /* Subtle soft shadow */
-        .soft-shadow {
-            box-shadow: 0 6px 22px rgba(55,85,35,0.12);
-        }
+        /* ---------------------------
+           Counters & numbers
+           --------------------------- */
+        .counter-number { font-weight: 800; font-variant-numeric: tabular-nums; }
 
-        /* Direction aware tweaks */
-        [dir="rtl"] .hero-content { text-align: right; }
-        [dir="rtl"] .programs-grid { direction: rtl; }
-        [dir="rtl"] .where-map { margin-left: 0; margin-right: auto; }
-
-        /* Ensure SVG map scales well */
-        .af-map {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Responsive fine-tuning */
+        /* ---------------------------
+           UX / small responsive tweaks
+           --------------------------- */
         @media (max-width: 768px) {
             .hero-blob.one { display: none; }
-            .hero-blob.two { opacity: 0.6; }
             .hero-blob.three { display: none; }
+            .glass { border-radius: 16px; }
         }
 
-        /* Accessibility focus */
-        .cta-btn:focus {
-            outline: 3px solid rgba(57, 101, 40, 0.18);
-            outline-offset: 2px;
-        }
+        /* focus styles */
+        .cta-btn:focus { outline: 3px solid rgba(55,85,35,0.12); outline-offset: 2px; }
 
-        /* Minor animation for program cards */
-        .program-card { transition: transform .28s ease, box-shadow .28s ease; }
-        .program-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(55,85,35,0.12); }
+        /* small helper to keep logos perfectly sized */
+        .logo-img { width: 140px; height: auto; object-fit: contain; }
 
-        /* FAQ/Mission icons container */
-        .mission-icon {
-            width: 56px;
-            height: 56px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: linear-gradient(180deg, rgba(59,93,43,0.06), rgba(59,93,43,0.03));
-            border: 1px solid rgba(59,93,43,0.06);
-        }
     </style>
 @endsection
 
 @section('content')
     <main class="relative w-full overflow-hidden">
+
         {{-- HERO --}}
-        <section class="relative bg-gradient-to-b from-[#356f1d] via-[#3a7323] to-[#2f5a1a] text-white">
-            <div class="hero-blob one"></div>
-            <div class="hero-blob two"></div>
-            <div class="hero-blob three"></div>
+        <section class="hero relative">
+            <div class="hero-inner relative z-0">
+                <!-- Blobs -->
+                <div class="hero-blob one" aria-hidden="true"></div>
+                <div class="hero-blob two" aria-hidden="true"></div>
+                <div class="hero-blob three" aria-hidden="true"></div>
 
-            <div class="max-w-7xl mx-auto px-6 py-24 lg:py-32">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                    <div class="hero-content relative z-10">
-                        <div class="glass soft-shadow p-6 md:p-10 rounded-2xl max-w-xl">
-                            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight" data-i18n="hero.title">
-                                JOYA — Empowering Youth, Building Futures
-                            </h1>
-                            <p class="mt-4 text-lg sm:text-xl text-white/90" data-i18n="hero.subtitle">
-                                We provide education, livelihoods, and community health support across Afghanistan.
-                            </p>
+                <div class="max-w-7xl mx-auto px-6 py-20 lg:py-28 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                        <div class="hero-content">
+                            <div class="glass glass-strong p-6 md:p-10 rounded-2xl">
+                                <div class="flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-3">
+                                        <!-- Light logo shown in light mode -->
+                                        <img src="{{ asset('assets/logo/joya-logo-green.svg') }}" alt="JOYA" class="logo-img logo-light" />
+                                        <!-- White logo shown in dark mode -->
+                                        <img src="{{ asset('assets/logo/joya-logo-white.svg') }}" alt="JOYA" class="logo-img logo-dark" />
+                                    </div>
+                                    <div class="text-xs text-gray-700 dark:text-gray-300" data-i18n="hero.suptag">Community • Learning • Impact</div>
+                                </div>
 
-                            <div class="mt-6 flex items-center gap-4">
-                                <a href="#programs" class="cta-btn inline-flex items-center gap-3 bg-white text-[var(--joya-green)] font-semibold py-3 px-5 rounded-lg shadow-sm hover:shadow-md transition"
-                                   data-i18n="hero.button" role="button">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                    </svg>
-                                </a>
+                                <h1 class="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white" data-i18n="hero.title">
+                                    JOYA — Empowering Youth, Building Futures
+                                </h1>
 
-                                <div class="text-sm text-white/80">
-                                    <span data-i18n="hero.small_note">Support our programs — join as a volunteer or donor.</span>
+                                <p class="mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-200" data-i18n="hero.subtitle">
+                                    We provide education, livelihoods, and community health support across Afghanistan.
+                                </p>
+
+                                <div class="mt-6 flex flex-wrap items-center gap-4">
+                                    <a href="#programs" class="cta-btn inline-flex items-center gap-3 bg-[var(--joya-green)] text-white font-semibold py-3 px-5 rounded-lg shadow-sm hover:opacity-95 transition"
+                                       data-i18n="hero.button" role="button">
+                                        Learn More
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                        </svg>
+                                    </a>
+
+                                    <div class="text-sm text-gray-600 dark:text-gray-300">
+                                        <span data-i18n="hero.small_note">Support our programs — join as a volunteer or donor.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 flex flex-wrap gap-4 text-sm">
+                                <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                    <span class="w-2 h-2 rounded-full" style="background: var(--joya-green-3)"></span>
+                                    <span data-i18n="hero.point_1">Community-driven</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                    <span class="w-2 h-2 rounded-full" style="background: var(--joya-green)"></span>
+                                    <span data-i18n="hero.point_2">Impact-led</span>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- secondary small points under hero glass --}}
-                        <div class="mt-6 flex flex-wrap gap-4 text-sm text-white/80">
-                            <div class="flex items-center gap-3">
-                                <span class="w-2 h-2 rounded-full" style="background: var(--joya-green-3)"></span>
-                                <span data-i18n="hero.point_1">Community-driven</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="w-2 h-2 rounded-full" style="background: var(--joya-green)"></span>
-                                <span data-i18n="hero.point_2">Impact-led</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 flex justify-center lg:justify-end">
-                        {{-- decorative card showing quick mission summary --}}
-                        <div class="glass p-6 rounded-2xl max-w-md w-full soft-shadow">
-                            <div class="flex items-start gap-4">
-                                <img src="{{ asset('assets/logo/joya-logo-white.svg') }}" alt="JOYA" class="w-20 h-20"/>
-                                <div>
-                                    <h3 class="text-xl font-semibold" data-i18n="hero.card_title">Our Mission</h3>
-                                    <p class="mt-2 text-sm text-white/90" data-i18n="hero.card_desc">
-                                        To empower youth through skills, opportunities and inclusive community programs.
-                                    </p>
-
-                                    <div class="mt-4 flex gap-3">
-                                        <span class="inline-flex items-center gap-2 text-sm bg-white/5 rounded-full px-3 py-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/>
+                        <div class="flex justify-center lg:justify-end">
+                            <div class="glass p-6 rounded-2xl soft-shadow max-w-md w-full">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-16 h-16 rounded-lg bg-[var(--joya-green)]/10 flex items-center justify-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                                <path d="M12 2l1.5 4.5L18 8l-3 2 1 4.5L12 12l-4 2 1-4.5L6 8l4.5-1.5L12 2z"/>
                                             </svg>
-                                            <span data-i18n="hero.card_since">Since 2012</span>
-                                        </span>
-                                        <span class="inline-flex items-center gap-2 text-sm bg-white/5 rounded-full px-3 py-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a1 1 0 001 1h16a1 1 0 001-1V7" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 3v4M8 3v4" />
-                                            </svg>
-                                            <span data-i18n="hero.card_team">Local teams</span>
-                                        </span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white" data-i18n="hero.card_title">Our Mission</h3>
+                                        <p class="mt-2 text-sm text-gray-700 dark:text-gray-200" data-i18n="hero.card_desc">
+                                            To empower youth through skills, opportunities and inclusive community programs.
+                                        </p>
+
+                                        <div class="mt-4 flex gap-3">
+                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/>
+                                                </svg>
+                                                <span data-i18n="hero.card_since">Since 2018</span>
+                                            </span>
+                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a1 1 0 001 1h16a1 1 0 001-1V7" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 3v4M8 3v4" />
+                                                </svg>
+                                                <span data-i18n="hero.card_team">Local teams</span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div><!-- grid -->
+                </div><!-- container -->
+            </div><!-- hero-inner -->
         </section>
 
         {{-- STATISTICS / COUNTERS --}}
-        <section id="stats" class="bg-white dark:bg-[#07160a]">
+        <section id="stats" class="bg-white dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green)] counter-number" data-target="124" id="projects-counter">0</div>
-                        <div class="mt-3 text-sm font-medium" data-i18n="counter.projects">Projects Completed</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.projects">Projects Completed</div>
                         <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.projects_note">Sustainable projects across sectors.</div>
                     </div>
 
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green-2)] counter-number" data-target="50800" id="beneficiaries-counter">0</div>
-                        <div class="mt-3 text-sm font-medium" data-i18n="counter.beneficiaries">Beneficiaries Reached</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.beneficiaries">Beneficiaries Reached</div>
                         <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.beneficiaries_note">Individuals reached through programs.</div>
                     </div>
 
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green-3)] counter-number" data-target="24" id="provinces-counter">0</div>
-                        <div class="mt-3 text-sm font-medium" data-i18n="counter.provinces">Provinces Covered</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.provinces">Provinces Covered</div>
                         <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.provinces_note">Working in urban & rural areas.</div>
                     </div>
                 </div>
@@ -226,10 +315,10 @@
         </section>
 
         {{-- PROGRAM PREVIEW --}}
-        <section id="programs" class="bg-gray-50 dark:bg-[#07120d]">
+        <section id="programs" class="bg-gray-50 dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="text-center mb-10">
-                    <h2 class="text-2xl md:text-3xl font-bold" data-i18n="programs.title">Our Core Programs</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="programs.title">Our Core Programs</h2>
                     <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="programs.subtitle">
                         Programs tailored to local needs — education, livelihoods, and health.
                     </p>
@@ -240,7 +329,6 @@
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
                             <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
-                                {{-- Phosphor-style education icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green)]" viewBox="0 0 256 256" fill="none">
                                     <path d="M128 24L24 76l104 52 104-52L128 24z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M32 96v48a96 96 0 0096 16 96 96 0 0096-16V96" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -248,7 +336,7 @@
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold" data-i18n="program.title_1">Education & TVET</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_1">Education & TVET</h3>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_1">
                                     Skills training, vocational education, and teacher support to prepare youth for work.
                                 </p>
@@ -260,7 +348,6 @@
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
                             <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
-                                {{-- briefcase / entrepreneurship icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green-2)]" viewBox="0 0 256 256" fill="none">
                                     <rect x="32" y="72" width="192" height="120" rx="8" stroke="currentColor" stroke-width="12" />
                                     <path d="M168 72v-16a16 16 0 00-16-16h-48a16 16 0 00-16 16v16" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -268,7 +355,7 @@
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold" data-i18n="program.title_2">Livelihood & Entrepreneurship</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_2">Livelihood & Entrepreneurship</h3>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_2">
                                     Micro-enterprise support, business skills, and market linkages for youth-led initiatives.
                                 </p>
@@ -280,14 +367,13 @@
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
                             <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
-                                {{-- heart/health icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green-3)]" viewBox="0 0 256 256" fill="none">
                                     <path d="M128 216s-70-44-96-84a56 56 0 0196-64 56 56 0 0196 64c-26 40-96 84-96 84z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold" data-i18n="program.title_3">Health & Community Development</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_3">Health & Community Development</h3>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_3">
                                     Community health outreach, psychosocial support, and local infrastructure projects.
                                 </p>
@@ -299,16 +385,16 @@
         </section>
 
         {{-- WHERE WE WORK --}}
-        <section id="where" class="bg-white dark:bg-[#07160a]">
+        <section id="where" class="bg-white dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-bold" data-i18n="where.title">Where We Work</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="where.title">Where We Work</h2>
                         <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="where.desc">
                             JOYA operates across multiple provinces, focusing on areas with the greatest need and potential for impact.
                         </p>
 
-                        <ul class="mt-6 space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                        <ul class="mt-6 space-y-3 text-sm text-gray-700 dark:text-gray-300">
                             <li class="flex items-start gap-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7l3-7z"/>
@@ -326,10 +412,8 @@
                     </div>
 
                     <div class="where-map flex justify-center lg:justify-end">
-                        {{-- Simple Afghanistan silhouette SVG (modern, minimal) --}}
                         <div class="glass p-6 rounded-2xl soft-shadow max-w-md w-full">
                             <svg class="af-map" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- Simplified abstract map silhouette for stylistic presentation -->
                                 <path d="M95 260c20-30 45-50 90-60 22-5 48-8 70-18 28-13 62-18 95-14 18 2 38 6 54 0 18-7 34-24 58-26 24-2 46 8 66 18 22 11 44 22 70 22 18 0 36-6 52-14 20-10 40-24 66-20 18 3 34 16 46 30v180c-20 12-44 16-68 22-38 9-78 12-116 22-36 9-76 24-114 26-38 2-78-2-114-14-24-8-44-22-66-34-30-16-62-28-88-48-18-14-32-34-42-56 6-8 10-16 14-26z" fill="url(#g1)" opacity="0.95"/>
                                 <defs>
                                     <linearGradient id="g1" x1="0" x2="1">
@@ -349,10 +433,10 @@
         </section>
 
         {{-- MISSION / FAQ (small) --}}
-        <section id="mission" class="bg-gray-50 dark:bg-[#07120d]">
+        <section id="mission" class="bg-gray-50 dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="text-center mb-10">
-                    <h2 class="text-2xl md:text-3xl font-bold" data-i18n="mission.title">Our Mission</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="mission.title">Our Mission</h2>
                     <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="mission.subtitle">
                         We believe in locally-led solutions and long-term impact.
                     </p>
@@ -361,13 +445,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green)]/8">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M12 2l1.5 4.5L18 8l-3 2 1 4.5L12 12l-4 2 1-4.5L6 8l4.5-1.5L12 2z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold" data-i18n="mission.item_1.title">Protect & Educate</h4>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_1.title">Protect & Educate</h4>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_1">
                                     Support education access for marginalized youth and strengthen local schools.
                                 </p>
@@ -377,13 +461,13 @@
 
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-2)]/8">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green-2)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M3 12h18M12 3v18" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold" data-i18n="mission.item_2.title">Create Opportunities</h4>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_2.title">Create Opportunities</h4>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_2">
                                     Build livelihood pathways and entrepreneurship opportunities for young people.
                                 </p>
@@ -393,13 +477,13 @@
 
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-3)]/8">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green-3)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M12 21V3M5 12h14" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold" data-i18n="mission.item_3.title">Strengthen Communities</h4>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_3.title">Strengthen Communities</h4>
                                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_3">
                                     Support health, protection, and community development that lasts.
                                 </p>
@@ -416,7 +500,50 @@
 
 @section('scripts')
     <script>
-        // COUNTER ANIMATION
+        /* ---------------------------
+           Header scroll background + logo switch
+           - Adds .scrolled-header to header when user scrolls
+           - Also toggles small 'scrolled' class for styling
+           --------------------------- */
+        (function () {
+            const header = document.querySelector('header') || document.querySelector('.site-header');
+            if (!header) return;
+
+            let lastScroll = 0;
+            const SCROLL_THRESHOLD = 12;
+
+            function onScroll() {
+                const sc = window.scrollY || window.pageYOffset;
+                if (sc > SCROLL_THRESHOLD) {
+                    if(!header.classList.contains('scrolled-header')) header.classList.add('scrolled-header');
+                } else {
+                    header.classList.remove('scrolled-header');
+                }
+                lastScroll = sc;
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            // run once on load
+            onScroll();
+
+            // Logo visibility already handled via CSS .dark / .logo-light / .logo-dark
+            // But to be extra-safe (some theme toggles change data-theme on html), watch for attribute changes
+            const htmlEl = document.documentElement;
+            const obs = new MutationObserver(m => {
+                m.forEach(rec => {
+                    if (rec.attributeName === 'class' || rec.attributeName === 'data-theme' || rec.attributeName === 'data-lang') {
+                        // keep logos & header in sync (no-op - styles handle it)
+                    }
+                });
+            });
+            obs.observe(htmlEl, { attributes: true, attributeFilter: ['class', 'data-theme', 'data-lang'] });
+        })();
+    </script>
+
+    <script>
+        /* ---------------------------
+           COUNTER ANIMATION
+           --------------------------- */
         (function () {
             const counters = [
                 { el: document.getElementById('projects-counter'), target: parseInt(document.getElementById('projects-counter').dataset.target || 0, 10) },
@@ -427,6 +554,7 @@
             const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
             function animateCounter(el, start, end, duration) {
+                if(!el) return;
                 let startTime = null;
                 function step(timestamp) {
                     if (!startTime) startTime = timestamp;
@@ -443,17 +571,16 @@
                 requestAnimationFrame(step);
             }
 
-            // Observe when stats section enters viewport
             const statsSection = document.getElementById('stats');
             let started = false;
-            if (statsSection) {
+            if (statsSection && 'IntersectionObserver' in window) {
                 const observer = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !started) {
                             started = true;
                             counters.forEach(c => {
-                                // choose duration proportional to target
-                                const duration = Math.min(2200 + (c.target / 1000) * 1200, 4200);
+                                const baseDuration = 2000;
+                                const duration = Math.min(baseDuration + Math.log(Math.max(c.target,1)) * 900, 4200);
                                 animateCounter(c.el, 0, c.target, duration);
                             });
                         }
@@ -461,17 +588,14 @@
                 }, { threshold: 0.3 });
                 observer.observe(statsSection);
             } else {
-                // fallback - animate immediately
+                // fallback
                 counters.forEach(c => animateCounter(c.el, 0, c.target, 2000));
             }
-
-            // Simple i18n hook: buttons or links using data-i18n should be filled by the layout JS.
-            // This script only ensures counter numbers are readable for screen readers.
         })();
     </script>
 
     <script>
-        // Minor accessibility: enable keyboard activation for CTA if layout doesn't already
+        /* Accessibility: keyboard activation for CTA buttons */
         document.querySelectorAll('a.cta-btn').forEach(function(btn){
             btn.addEventListener('keyup', function(e){
                 if(e.key === 'Enter' || e.key === ' ') {
