@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "suptag": "Community • Learning • Impact",
+    "title": "JOYA — Empowering Youth, Building Futures",
+    "subtitle": "We provide education, livelihoods, and community health support across Afghanistan.",
+    "button": "Learn More",
+    "small_note": "Support our programs — join as a volunteer or donor.",
+    "point_1": "Community-driven",
+    "point_2": "Impact-led",
+    "card_title": "Our Mission",
+    "card_desc": "To empower youth through skills, opportunities and inclusive community programs.",
+    "card_since": "Since 2018",
+    "card_team": "Local teams"
+  },
+
+  "counter": {
+    "projects": "Projects Completed",
+    "projects_note": "Sustainable projects across sectors.",
+    "beneficiaries": "Beneficiaries Reached",
+    "beneficiaries_note": "Individuals reached through programs.",
+    "provinces": "Provinces Covered",
+    "provinces_note": "Working in urban & rural areas."
+  },
+
+  "programs": {
+    "title": "Our Core Programs",
+    "subtitle": "Programs tailored to local needs — education, livelihoods, and health."
+  },
+
+  "program": {
+    "title_1": "Education & TVET",
+    "desc_1": "Skills training, vocational education, and teacher support to prepare youth for work.",
+    "title_2": "Livelihood & Entrepreneurship",
+    "desc_2": "Micro-enterprise support, business skills, and market linkages for youth-led initiatives.",
+    "title_3": "Health & Community Development",
+    "desc_3": "Community health outreach, psychosocial support, and local infrastructure projects."
+  },
+
+  "where": {
+    "title": "Where We Work",
+    "desc": "JOYA operates across multiple provinces, focusing on areas with the greatest need and potential for impact.",
+    "point_1": "Partnerships with local organizations",
+    "point_2": "Accessible, community-led programming",
+    "map_note": "Map shows provinces where JOYA has active programs and partners."
+  },
+
+  "mission": {
+    "title": "Our Mission",
+    "subtitle": "We believe in locally-led solutions and long-term impact.",
+    "item_1": "Support education access for marginalized youth and strengthen local schools.",
+    "item_1.title": "Protect & Educate",
+    "item_2": "Build livelihood pathways and entrepreneurship opportunities for young people.",
+    "item_2.title": "Create Opportunities",
+    "item_3": "Support health, protection, and community development that lasts.",
+    "item_3.title": "Strengthen Communities"
+  }
+}

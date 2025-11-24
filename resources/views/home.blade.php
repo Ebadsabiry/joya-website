@@ -210,28 +210,28 @@
                                         <!-- White logo shown in dark mode -->
                                         <img src="{{ asset('assets/logo/joya-logo-white.svg') }}" alt="JOYA" class="logo-img logo-dark" />
                                     </div>
-                                    <div class="text-xs text-gray-700 dark:text-gray-300" data-i18n="hero.suptag">Community • Learning • Impact</div>
+                                    <div class="text-xs text-gray-700 dark:text-gray-300" data-i18n="hero.suptag" data-auto>Community • Learning • Impact</div>
                                 </div>
 
-                                <h1 class="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white" data-i18n="hero.title">
+                                <h1 class="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white" data-i18n="hero.title" data-auto>
                                     JOYA — Empowering Youth, Building Futures
                                 </h1>
 
-                                <p class="mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-200" data-i18n="hero.subtitle">
+                                <p class="mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-200" data-i18n="hero.subtitle" data-auto>
                                     We provide education, livelihoods, and community health support across Afghanistan.
                                 </p>
 
                                 <div class="mt-6 flex flex-wrap items-center gap-4">
                                     <a href="#programs" class="cta-btn inline-flex items-center gap-3 bg-[var(--joya-green)] text-white font-semibold py-3 px-5 rounded-lg shadow-sm hover:opacity-95 transition"
-                                       data-i18n="hero.button" role="button">
+                                       data-i18n="hero.button" role="button" data-auto>
                                         Learn More
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                         </svg>
                                     </a>
 
                                     <div class="text-sm text-gray-600 dark:text-gray-300">
-                                        <span data-i18n="hero.small_note">Support our programs — join as a volunteer or donor.</span>
+                                        <span data-i18n="hero.small_note" data-auto>Support our programs — join as a volunteer or donor.</span>
                                     </div>
                                 </div>
                             </div>
@@ -239,11 +239,11 @@
                             <div class="mt-6 flex flex-wrap gap-4 text-sm">
                                 <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                                     <span class="w-2 h-2 rounded-full" style="background: var(--joya-green-3)"></span>
-                                    <span data-i18n="hero.point_1">Community-driven</span>
+                                    <span data-i18n="hero.point_1" data-auto>Community-driven</span>
                                 </div>
                                 <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                                     <span class="w-2 h-2 rounded-full" style="background: var(--joya-green)"></span>
-                                    <span data-i18n="hero.point_2">Impact-led</span>
+                                    <span data-i18n="hero.point_2" data-auto>Impact-led</span>
                                 </div>
                             </div>
                         </div>
@@ -252,28 +252,28 @@
                             <div class="glass p-6 rounded-2xl soft-shadow max-w-md w-full">
                                 <div class="flex items-start gap-4">
                                     <div class="flex-shrink-0">
-                                        <div class="w-16 h-16 rounded-lg bg-[var(--joya-green)]/10 flex items-center justify-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                        <div class="w-16 h-16 rounded-lg bg-[var(--joya-green)]/10 flex items-center justify-center" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none">
                                                 <path d="M12 2l1.5 4.5L18 8l-3 2 1 4.5L12 12l-4 2 1-4.5L6 8l4.5-1.5L12 2z"/>
                                             </svg>
                                         </div>
                                     </div>
                                     <div>
-                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white" data-i18n="hero.card_title">Our Mission</h3>
-                                        <p class="mt-2 text-sm text-gray-700 dark:text-gray-200" data-i18n="hero.card_desc">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white" data-i18n="hero.card_title" data-auto>Our Mission</h3>
+                                        <p class="mt-2 text-sm text-gray-700 dark:text-gray-200" data-i18n="hero.card_desc" data-auto>
                                             To empower youth through skills, opportunities and inclusive community programs.
                                         </p>
 
                                         <div class="mt-4 flex gap-3">
-                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1" data-auto>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3" />
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/>
                                                 </svg>
                                                 <span data-i18n="hero.card_since">Since 2018</span>
                                             </span>
-                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <span class="inline-flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1" data-auto>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a1 1 0 001 1h16a1 1 0 001-1V7" />
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 3v4M8 3v4" />
                                                 </svg>
@@ -295,20 +295,20 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green)] counter-number" data-target="124" id="projects-counter">0</div>
-                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.projects">Projects Completed</div>
-                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.projects_note">Sustainable projects across sectors.</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.projects" data-auto>Projects Completed</div>
+                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.projects_note" data-auto>Sustainable projects across sectors.</div>
                     </div>
 
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green-2)] counter-number" data-target="50800" id="beneficiaries-counter">0</div>
-                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.beneficiaries">Beneficiaries Reached</div>
-                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.beneficiaries_note">Individuals reached through programs.</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.beneficiaries" data-auto>Beneficiaries Reached</div>
+                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.beneficiaries_note" data-auto>Individuals reached through programs.</div>
                     </div>
 
                     <div class="glass p-6 rounded-2xl soft-shadow text-center">
                         <div class="text-4xl md:text-5xl text-[var(--joya-green-3)] counter-number" data-target="24" id="provinces-counter">0</div>
-                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.provinces">Provinces Covered</div>
-                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.provinces_note">Working in urban & rural areas.</div>
+                        <div class="mt-3 text-sm font-medium text-gray-700 dark:text-gray-200" data-i18n="counter.provinces" data-auto>Provinces Covered</div>
+                        <div class="mt-2 text-xs text-gray-500 dark:text-gray-300" data-i18n="counter.provinces_note" data-auto>Working in urban & rural areas.</div>
                     </div>
                 </div>
             </div>
@@ -318,8 +318,8 @@
         <section id="programs" class="bg-gray-50 dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="text-center mb-10">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="programs.title">Our Core Programs</h2>
-                    <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="programs.subtitle">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="programs.title" data-auto>Our Core Programs</h2>
+                    <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="programs.subtitle" data-auto>
                         Programs tailored to local needs — education, livelihoods, and health.
                     </p>
                 </div>
@@ -328,7 +328,7 @@
                     {{-- Education & TVET --}}
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
+                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green)]" viewBox="0 0 256 256" fill="none">
                                     <path d="M128 24L24 76l104 52 104-52L128 24z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M32 96v48a96 96 0 0096 16 96 96 0 0096-16V96" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -336,8 +336,8 @@
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_1">Education & TVET</h3>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_1">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_1" data-auto>Education & TVET</h3>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_1" data-auto>
                                     Skills training, vocational education, and teacher support to prepare youth for work.
                                 </p>
                             </div>
@@ -347,7 +347,7 @@
                     {{-- Livelihood & Entrepreneurship --}}
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
+                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green-2)]" viewBox="0 0 256 256" fill="none">
                                     <rect x="32" y="72" width="192" height="120" rx="8" stroke="currentColor" stroke-width="12" />
                                     <path d="M168 72v-16a16 16 0 00-16-16h-48a16 16 0 00-16 16v16" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
@@ -355,8 +355,8 @@
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_2">Livelihood & Entrepreneurship</h3>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_2">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_2" data-auto>Livelihood & Entrepreneurship</h3>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_2" data-auto>
                                     Micro-enterprise support, business skills, and market linkages for youth-led initiatives.
                                 </p>
                             </div>
@@ -366,15 +366,15 @@
                     {{-- Health & Community Development --}}
                     <article class="program-card glass rounded-2xl p-6 soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6">
+                            <div class="program-icon p-3 rounded-lg bg-white/5 border border-white/6" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--joya-green-3)]" viewBox="0 0 256 256" fill="none">
                                     <path d="M128 216s-70-44-96-84a56 56 0 0196-64 56 56 0 0196 64c-26 40-96 84-96 84z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
 
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_3">Health & Community Development</h3>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_3">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white" data-i18n="program.title_3" data-auto>Health & Community Development</h3>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="program.desc_3" data-auto>
                                     Community health outreach, psychosocial support, and local infrastructure projects.
                                 </p>
                             </div>
@@ -389,20 +389,20 @@
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
-                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="where.title">Where We Work</h2>
-                        <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="where.desc">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="where.title" data-auto>Where We Work</h2>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="where.desc" data-auto>
                             JOYA operates across multiple provinces, focusing on areas with the greatest need and potential for impact.
                         </p>
 
                         <ul class="mt-6 space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                            <li class="flex items-start gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <li class="flex items-start gap-3" data-auto>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                     <path d="M12 2l3 7h7l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7l3-7z"/>
                                 </svg>
                                 <span data-i18n="where.point_1">Partnerships with local organizations</span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--joya-green-2)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <li class="flex items-start gap-3" data-auto>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--joya-green-2)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                     <path d="M3 12h18"/>
                                     <path d="M12 3v18"/>
                                 </svg>
@@ -423,7 +423,7 @@
                                 </defs>
                             </svg>
 
-                            <div class="mt-4 text-sm text-gray-700 dark:text-gray-200" data-i18n="where.map_note">
+                            <div class="mt-4 text-sm text-gray-700 dark:text-gray-200" data-i18n="where.map_note" data-auto>
                                 Map shows provinces where JOYA has active programs and partners.
                             </div>
                         </div>
@@ -436,8 +436,8 @@
         <section id="mission" class="bg-gray-50 dark:bg-transparent">
             <div class="max-w-7xl mx-auto px-6 py-16">
                 <div class="text-center mb-10">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="mission.title">Our Mission</h2>
-                    <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="mission.subtitle">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-i18n="mission.title" data-auto>Our Mission</h2>
+                    <p class="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-300" data-i18n="mission.subtitle" data-auto>
                         We believe in locally-led solutions and long-term impact.
                     </p>
                 </div>
@@ -445,14 +445,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green)]/8">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green)]/8" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M12 2l1.5 4.5L18 8l-3 2 1 4.5L12 12l-4 2 1-4.5L6 8l4.5-1.5L12 2z"/>
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_1.title">Protect & Educate</h4>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_1">
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_1.title" data-auto>Protect & Educate</h4>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_1" data-auto>
                                     Support education access for marginalized youth and strengthen local schools.
                                 </p>
                             </div>
@@ -461,14 +461,14 @@
 
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-2)]/8">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-2)]/8" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green-2)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M3 12h18M12 3v18" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_2.title">Create Opportunities</h4>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_2">
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_2.title" data-auto>Create Opportunities</h4>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_2" data-auto>
                                     Build livelihood pathways and entrepreneurship opportunities for young people.
                                 </p>
                             </div>
@@ -477,14 +477,14 @@
 
                     <div class="p-6 glass rounded-2xl soft-shadow">
                         <div class="flex items-start gap-4">
-                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-3)]/8">
+                            <div class="mission-icon w-14 h-14 flex items-center justify-center rounded-lg bg-[var(--joya-green-3)]/8" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[var(--joya-green-3)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                     <path d="M12 21V3M5 12h14" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_3.title">Strengthen Communities</h4>
-                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_3">
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="mission.item_3.title" data-auto>Strengthen Communities</h4>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300" data-i18n="mission.item_3" data-auto>
                                     Support health, protection, and community development that lasts.
                                 </p>
                             </div>
